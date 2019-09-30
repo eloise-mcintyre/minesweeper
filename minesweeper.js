@@ -1,69 +1,48 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
+// To do:
+
+// Reset the Board
+// ------> After a win or loss, give players a chance to try again by resetting the board to its default state. You'll need to put classes back the way they were at the start, and re-initialize the global board object.
+
+// Sound Effects
+// -----> nvestigate how to use JavaScript to play a sound when the user uncovers or marks a cell. Play an explosion when they uncover a bomb, and applause when they win. (There's a resourse on the foundations repo FYI)
+
+
+
+
 // Define your `board` object here!
-var board = {
-  cells: [
-    {row: 0,
-    col: 0,
-    isMine: true,
-    hidden: true},
 
-    {row: 0,
-    col: 1,
-    isMine: true,
-    hidden: true},
+var board = {}
+board.cells = []
 
-    {row: 0,
-    col: 2,
-    isMine: false,
-    hidden: true},
-
-    {row: 1,
-    col: 0,
-    isMine: false,
-    hidden: true},
-
-    {row: 1,
-    col: 1,
-    isMine: false,
-    hidden: true},
-
-    {row: 1,
-    col: 2,
-    isMine: false,
-    hidden: true},
-
-    {row: 2,
-    col: 0,
-    isMine: false,
-    hidden: true},
-
-    {row: 2,
-    col: 1,
-    isMine: false,
-    hidden: true},
-
-    {row: 2,
-    col: 2,
-    isMine: false,
-    hidden: true}
-  ]
+function makeBoard (numberOfSquares) {
+  for (r = 0; r < numberOfSquares; r++) {
+    for (c = 0; c < numberOfSquares; c++)
+      board.cells.push({
+        row: r,
+        col: c,
+        isMine: Math.random() >= 0.7,
+        isMarked: false,
+        hidden: true
+      })
+    }
 }
 
 function startGame () {
+  makeBoard(6);
+  lib.initBoard()
+
   for (var i = 0; i < board.cells.length; i++) {
     board.cells[i].surroundingMines = countSurroundingMines(board.cells[i])
   }
-  lib.initBoard()
-
+  
   document.addEventListener("click", checkForWin)
   document.addEventListener("contextmenu", checkForWin)
 }
 
-// Define this function to look for a win condition:
-//
-// 1. Are all of the cells that are NOT mines visible?
-// 2. Are all of the mines marked?
+// This Function checks for a win condition:
+
 function checkForWin () {
   for (var i = 0; i < board.cells.length; i++) {
     if (board.cells[i].isMine && !board.cells[i].isMarked) {
