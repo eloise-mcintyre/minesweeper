@@ -42,18 +42,17 @@ function startGame () {
 }
 
 
-function explosionOrClick (){
+
+function explosion () {
   let bomb = new Audio("audio/explosion.mp3")
-  let click = new Audio("audio/click.mp3");
+  
   for (var i = 0; i < board.cells.length; i++){
     if((board.cells[i].isMine && !board.cells[i].hidden)){
       bomb.play();
-    } else {
-      (click.play())
     }
   }
 }
-document.addEventListener("click", explosionOrClick)
+document.addEventListener("click", explosion)
 
 
 
