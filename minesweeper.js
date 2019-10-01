@@ -32,7 +32,6 @@ function startGame () {
 }
 
 
-
 function explosion () {
   let bomb = new Audio("audio/explosion.mp3")
 
