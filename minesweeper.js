@@ -22,7 +22,7 @@ function makeBoard (numberOfSquares) {
       board.cells.push({
         row: r,
         col: c,
-        isMine: Math.random() >= 0.9,
+        isMine: Math.random() >= 0.7,
         isMarked: false,
         hidden: true
       })
