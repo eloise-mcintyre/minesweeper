@@ -1,15 +1,5 @@
 document.addEventListener('DOMContentLoaded', startGame)
 
-// To do:
-
-// Reset the Board
-// ------> After a win or loss, give players a chance to try again by resetting the board to its default state. You'll need to put classes back the way they were at the start, and re-initialize the global board object.
-
-// Sound Effects
-// -----> nvestigate how to use JavaScript to play a sound when the user uncovers or marks a cell. Play an explosion when they uncover a bomb, and applause when they win. (There's a resourse on the foundations repo FYI)
-
-
-
 
 // Define your `board` object here!
 
@@ -45,7 +35,7 @@ function startGame () {
 
 function explosion () {
   let bomb = new Audio("audio/explosion.mp3")
-  
+
   for (var i = 0; i < board.cells.length; i++){
     if((board.cells[i].isMine && !board.cells[i].hidden)){
       bomb.play();
