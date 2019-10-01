@@ -22,7 +22,7 @@ function makeBoard (numberOfSquares) {
       board.cells.push({
         row: r,
         col: c,
-        isMine: Math.random() >= 0.7,
+        isMine: Math.random() >= 0.9,
         isMarked: false,
         hidden: true
       })
@@ -41,16 +41,35 @@ function startGame () {
   document.addEventListener("contextmenu", checkForWin)
 }
 
+
+function explosionOrClick (){
+  let bomb = new Audio("audio/explosion.mp3")
+  let click = new Audio("audio/click.mp3");
+  for (var i = 0; i < board.cells.length; i++){
+    if((board.cells[i].isMine && !board.cells[i].hidden)){
+      bomb.play();
+    } else {
+      (click.play())
+    }
+  }
+}
+document.addEventListener("click", explosionOrClick)
+
+
+
 // This Function checks for a win condition:
 function checkForWin () {
+  let applauseSound = new Audio("audio/applause.mp3");
+
   for (var i = 0; i < board.cells.length; i++) {
     if (board.cells[i].isMine && !board.cells[i].isMarked) {
-    return
+      return
     } else if (!board.cells[i].isMine && board.cells[i].hidden) {
       return
     }
   }
   lib.displayMessage('You win!')
+  applauseSound.play();
 }
 
 // Define this function to count the number of mines around the cell (there could be as many as 8). You don't have to get the surrounding cells yourself! Just use `lib.getSurroundingCells`: var surrounding = lib.getSurroundingCells(cell.row, cell.col)

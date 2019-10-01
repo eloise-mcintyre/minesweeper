@@ -58,3 +58,8 @@ div.hidden:hover {
 div.marked, div.marked:hover {
   background: no-repeat center/60% url("images/mark1.svg") #A0A0A0;
 }
+
+button {
+  font-family: 'courier new', 'Open Sans', sans-serif;
+  margin: 10px;
+}
