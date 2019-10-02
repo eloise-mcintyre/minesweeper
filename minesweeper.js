@@ -33,7 +33,7 @@ function startGame () {
 
 
 function explosion () {
-  let bomb = new Audio("audio/explosion.mp3")
+  let bomb = new Audio("audio/Explosion.mp3")
 
   for (var i = 0; i < board.cells.length; i++){
     if((board.cells[i].isMine && !board.cells[i].hidden)){
